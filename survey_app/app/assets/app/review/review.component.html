@@ -1,0 +1,115 @@
+<div *ngIf="review == null">
+  Loading...
+</div>
+<div *ngIf="review != null">
+<h2>Hi {{review.commit.author_name}}</h2>
+
+  <div class="row">
+    <div class="card col-md-6">
+      <div class="card-block">
+        <h4 class="card-title">Research Summary</h4>
+        <p class="card-text">
+          My name is Louis-Philippe Querel and I am a Master student in software engineering at Concordia University. I am
+          presently doing a study on the introduction of static analysis warnings (Findbugs & Jlint) in the commits of projects
+          and their usefulness to software developers. In the process of this analysis we observed the following warnings
+          and would appreciate your opinion of them.
+
+        </p>
+        <p class="card-text">
+          Please indicate below if you find the following warnings useful. You can also enter an optional comment
+        </p>
+      </div>
+    </div>
+    <div class="card col-md-6">
+      <div class="card-block">
+        <h4 class="card-title">Commit Information</h4>
+          <ul class="card-text">
+            <li><b>Project:</b> {{review.commit.name}}</li>
+            <li><b>Commit:</b> <a href="https://github.com/apache/{{review.commit.name}}/commit/{{review.commit.commit}}">{{review.commit.commit.slice(0,8)}}</a></li>
+            <li><b>Date:</b> {{review.commit.author_date | date}}</li>
+            <li><b>Message:</b> {{review.commit.commit_message}}</li>
+
+          </ul>
+      </div>
+    </div>
+    <div class="card col-md-12">
+      <div class="card-block">
+        <h4 class="card-title">Commit New Warnings</h4>
+
+        <div class="card" *ngFor="let warning of review.warnings">
+          <div class="card-block">
+            <h5 class="card-title">{{warning.warning.resource}}</h5>
+
+            <div class="rows">
+              <div class="col-md-5">
+                <ul class="card-text">
+                  <li><b>Line:</b>
+
+                      {{warning.warning.line}}
+                    (
+                    <a href="https://github.com/apache/{{review.commit.name}}/blob/{{review.commit.commit}}/{{warning.warning.resource}}#L{{warning.warning.line}}" target="_blank">
+                      See GitHub diff
+                    </a>
+                    )
+                  </li>
+                  <li><b>Tool:</b> {{warning.warning.generator_tool}}</li>
+                  <li><b>Warning:</b> {{warning.warning.weakness}}</li>
+                </ul>
+                <form class="form card-text">
+                  <div class="form-group">
+                    <textarea class="form-control" rows="2" placeholder="Write a comment about the warning if applicable" #comment></textarea>
+                  </div>
+
+                  <input type="checkbox" [hidden]="true" #complete>
+
+
+                  <button type="submit" [disabled]="complete.selected == true" class="btn btn-primary"
+                          (click)="saveReview(review.commit.repo, review.commit.commit, warning.warning.id, comment.value, true); complete.selected = true">Useful</button>
+                  <button type="submit" [disabled]="complete.selected == true"
+                          class="btn btn-danger" (click)="saveReview(review.commit.repo, review.commit.commit, warning.warning.id, comment.value, false); complete.selected = true">Not Useful</button>
+                  <button [disabled]="true" *ngIf="complete.selected" class="btn">Thank you for feedback</button>
+
+                </form>
+              </div>
+              <div class="col-md-7">
+                <table class="table table-sm">
+                  <tbody>
+                  <tr *ngFor="let line of warning.lines" [ngClass]="{'table-danger': line.warning}">
+                    <td style="border-top: none; padding:0;">{{line.number}}</td>
+                    <td style="border-top: none; padding:0;"><code style="margin-bottom: 0">{{line.content}}</code></td>
+                  </tr>
+                  <tr>
+                    <td style="border-top: none; padding:0;"></td>
+                    <td style="border-top: none; padding:0;">
+                      <a href="https://github.com/apache/{{review.commit.name}}/blob/{{review.commit.commit}}/{{warning.warning.resource}}#L{{warning.warning.line}}" target="_blank">
+                        See full context on GitHub...
+                      </a>
+                    </td>
+                  </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
+
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card col-md-12">
+      <div class="card-block">
+        <h4 class="card-title">Thank you</h4>
+        <p class="card-text">
+          Thank you for participating in this survey. If you have any questions please reach out to myself at l_querel@encs.concordia.ca.
+          If we identify additional warnings in some of your other commits you might receive another email. You can unsubscribe
+          from future emails by following the link in the email.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

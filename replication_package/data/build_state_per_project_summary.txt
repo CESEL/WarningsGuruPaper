@@ -1,0 +1,52 @@
+-- Based on all of the build status
+
+select name,
+   count(*) as commits,
+   count(*) filter (where build='BUILD') as BUILD,
+   round(100.0 * (count(*) filter (where build='BUILD')) / count(*), 2) as B_PERC,
+   count(*) filter (where build='FAILURE') as FAILURE,
+   round(100.0 * (count(*) filter (where build='FAILURE')) / count(*), 2) as F_PERC,
+   count(*) filter (where build is null) as QUEUED,
+   round(100.0 * (count(*) filter (where build='QUEUED')) / count(*), 2) as Q_PERC,
+   count(*) filter (where build='MISSING POM') as NO_POM,
+   round(100.0 * (count(*) filter (where build='MISSING POM')) / count(*), 2) as N_PERC
+   from static_commit_processed as p, repositories as r where r.id = p.repo group by name order by name;
+
+     name     | commits | build | b_perc | failure | f_perc | queued | q_perc | no_pom | n_perc
+--------------+---------+-------+--------+---------+--------+--------+--------+--------+--------
+ commons-lang |    4838 |  3123 |  64.55 |     191 |   3.95 |      0 |   0.00 |   1524 |  31.50
+ hadoop       |   15350 |  9360 |  60.98 |    5098 |  33.21 |      0 |   0.00 |    892 |   5.81
+ ignite       |    4368 |  3606 |  82.55 |     762 |  17.45 |      0 |   0.00 |      0 |   0.00
+ kylin        |    5764 |  5084 |  88.20 |     665 |  11.54 |      0 |   0.00 |     15 |   0.26
+ phoenix      |    1892 |  1818 |  96.09 |      74 |   3.91 |      0 |   0.00 |      0 |   0.00
+ ranger       |    1913 |   961 |  50.24 |     952 |  49.76 |      0 |   0.00 |      0 |   0.00
+ tika         |    3347 |  3166 |  94.59 |     179 |   5.35 |      0 |   0.00 |      2 |   0.06
+ wicket       |   19742 |  6164 |  31.22 |    4746 |  24.04 |      0 |   0.00 |   8832 |  44.74
+
+
+-- Based only on the commit which we are capable of building (build and failure)
+
+select name,
+   count(*) filter (where build='BUILD') as BUILD,
+   round(100.0 * (count(*) filter (where build='BUILD')) / count(*), 2) as B_PERC,
+   count(*) filter (where build='FAILURE') as FAILURE,
+   round(100.0 * (count(*) filter (where build='FAILURE')) / count(*), 2) as F_PERC,
+   count(*) filter (where build in ('FAILURE', 'BUILD')) as COMPATIBLE
+   from static_commit_processed as p, repositories as r
+   where r.id = p.repo and build in ('BUILD', 'FAILURE')
+   group by name order by name;
+
+     name     | build | b_perc | failure | f_perc | compatible
+--------------+-------+--------+---------+--------+------------
+ commons-lang |  3123 |  94.24 |     191 |   5.76 |       3314
+ hadoop       |  9360 |  64.74 |    5098 |  35.26 |      14458
+ ignite       |  3606 |  82.55 |     762 |  17.45 |       4368
+ kylin        |  5084 |  88.43 |     665 |  11.57 |       5749
+ phoenix      |  1818 |  96.09 |      74 |   3.91 |       1892
+ ranger       |   961 |  50.24 |     952 |  49.76 |       1913
+ tika         |  3166 |  94.65 |     179 |   5.35 |       3345
+ wicket       |  6164 |  56.50 |    4746 |  43.50 |      10910
+
+
+
+

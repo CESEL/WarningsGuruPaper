@@ -1,0 +1,225 @@
+    fix          contains_bug     repo_name               ns       
+ Mode :logical   Mode :logical   Length:3314        Min.   :0.000  
+ FALSE:2734      FALSE:2526      Class :character   1st Qu.:1.000  
+ TRUE :580       TRUE :788       Mode  :character   Median :1.000  
+ NA's :0         NA's :0                            Mean   :1.013  
+                                                    3rd Qu.:1.000  
+                                                    Max.   :3.000  
+       nd               nf             entrophy            la         
+ Min.   : 0.000   Min.   :  0.000   Min.   :0.0000   Min.   :    0.0  
+ 1st Qu.: 1.000   1st Qu.:  1.000   1st Qu.:0.0000   1st Qu.:    1.0  
+ Median : 1.000   Median :  1.000   Median :0.0000   Median :    6.0  
+ Mean   : 1.512   Mean   :  2.589   Mean   :0.4380   Mean   :  110.2  
+ 3rd Qu.: 2.000   3rd Qu.:  2.000   3rd Qu.:0.8494   3rd Qu.:   26.0  
+ Max.   :42.000   Max.   :374.000   Max.   :7.9550   Max.   :85374.0  
+       ld                 lt            ndev            age          
+ Min.   :    0.00   Min.   :   0   Min.   : 0.00   Min.   :-456.043  
+ 1st Qu.:    1.00   1st Qu.: 218   1st Qu.:14.00   1st Qu.:   0.094  
+ Median :    2.00   Median : 585   Median :18.00   Median :   7.077  
+ Mean   :   92.67   Mean   :1176   Mean   :16.92   Mean   :  66.550  
+ 3rd Qu.:   10.00   3rd Qu.:1098   3rd Qu.:20.00   3rd Qu.:  74.561  
+ Max.   :85374.00   Max.   :9101   Max.   :33.00   Max.   :1506.350  
+      nuc               exp              rexp                 sexp       
+ Min.   :   0.00   Min.   :   0.0   Min.   :-21599.000   Min.   :   0.0  
+ 1st Qu.:   7.00   1st Qu.: 105.6   1st Qu.:     1.009   1st Qu.:  73.0  
+ Median :  27.00   Median : 601.5   Median :     1.113   Median : 373.5  
+ Mean   :  80.28   Mean   :1140.5   Mean   :    94.926   Mean   : 783.5  
+ 3rd Qu.:  92.00   3rd Qu.:1919.1   3rd Qu.:     4.494   3rd Qu.:1293.8  
+ Max.   :3355.00   Max.   :4431.0   Max.   :  6647.154   Max.   :3476.0  
+    warnings        new_warnings     jlint_warnings    new_jlint_warnings
+ Min.   :  0.000   Min.   : 0.0000   Min.   :  0.000   Min.   : 0.0000   
+ 1st Qu.:  0.000   1st Qu.: 0.0000   1st Qu.:  0.000   1st Qu.: 0.0000   
+ Median :  1.000   Median : 0.0000   Median :  1.000   Median : 0.0000   
+ Mean   :  7.475   Mean   : 0.2559   Mean   :  5.033   Mean   : 0.1678   
+ 3rd Qu.:  7.000   3rd Qu.: 0.0000   3rd Qu.:  5.000   3rd Qu.: 0.0000   
+ Max.   :484.000   Max.   :65.0000   Max.   :340.000   Max.   :65.0000   
+ findbugs_warnings new_findbugs_warnings security_warnings
+ Min.   :  0.000   Min.   : 0.00000      Min.   :  0.000  
+ 1st Qu.:  0.000   1st Qu.: 0.00000      1st Qu.:  0.000  
+ Median :  0.000   Median : 0.00000      Median :  0.000  
+ Mean   :  2.441   Mean   : 0.08811      Mean   :  2.653  
+ 3rd Qu.:  1.000   3rd Qu.: 0.00000      3rd Qu.:  2.000  
+ Max.   :258.000   Max.   :54.00000      Max.   :173.000  
+ new_security_warnings fallback_warnings fallback_security_warnings
+ Min.   : 0.00000      Mode :logical     Mode :logical             
+ 1st Qu.: 0.00000      FALSE:3103        FALSE:3232                
+ Median : 0.00000      TRUE :211         TRUE :82                  
+ Mean   : 0.07574      NA's :0           NA's :0                   
+ 3rd Qu.: 0.00000                                                  
+ Max.   :54.00000                                                  
+ new_warnings_present new_security_warnings_present build_failed   
+ Mode :logical        Mode :logical                 Mode :logical  
+ FALSE:3103           FALSE:3232                    FALSE:3123     
+ TRUE :211            TRUE :82                      TRUE :191      
+ NA's :0              NA's :0                       NA's :0        
+                                                                   
+                                                                   
+   w_bool       
+ Mode :logical  
+ FALSE:1486     
+ TRUE :1828     
+ NA's :0        
+                
+                
+[1] "model 1"
+
+Call:
+glm(formula = contains_bug ~ log2(1 + ns) + log2(1 + la) + log2(1 + 
+    ld) + log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + age) + 
+    log2(1 + exp) + log2(1 + rexp), family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.6024  -0.6974  -0.4488  -0.2234   2.5447  
+
+Coefficients:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -2.69817    0.35294  -7.645 2.09e-14 ***
+log2(1 + ns)   -0.29103    0.34314  -0.848  0.39636    
+log2(1 + la)    0.38297    0.02205  17.371  < 2e-16 ***
+log2(1 + ld)   -0.04209    0.02159  -1.950  0.05121 .  
+log2(1 + lt)    0.29178    0.02453  11.894  < 2e-16 ***
+fixTRUE         0.32180    0.11614   2.771  0.00559 ** 
+log2(1 + ndev) -0.75265    0.06524 -11.536  < 2e-16 ***
+log2(1 + age)   0.05233    0.01898   2.757  0.00583 ** 
+log2(1 + exp)   0.08337    0.01625   5.129 2.91e-07 ***
+log2(1 + rexp) -0.03796    0.02279  -1.666  0.09574 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3614.9  on 3288  degrees of freedom
+Residual deviance: 2989.9  on 3279  degrees of freedom
+  (25 observations deleted due to missingness)
+AIC: 3009.9
+
+Number of Fisher Scoring iterations: 5
+
+  log2(1 + ns)   log2(1 + la)   log2(1 + ld)   log2(1 + lt)            fix 
+      1.191015       1.399827       1.294076       2.042629       1.025052 
+log2(1 + ndev)  log2(1 + age)  log2(1 + exp) log2(1 + rexp) 
+      2.033533       1.548929       1.067953       1.554586 
+   (Intercept)   log2(1 + ns)   log2(1 + la)   log2(1 + ld)   log2(1 + lt) 
+    0.06732879     0.74749300     1.46663188     0.95878361     1.33881110 
+       fixTRUE log2(1 + ndev)  log2(1 + age)  log2(1 + exp) log2(1 + rexp) 
+    1.37961364     0.47111559     1.05372678     1.08694874     0.96275118 
+[1] "d2 =  0.172903671615642"
+[1] "model 2 -  just warnings"
+
+Call:
+glm(formula = contains_bug ~ log2(1 + new_security_warnings) + 
+    log2(1 + security_warnings) + log2(1 + new_findbugs_warnings) + 
+    log2(1 + new_jlint_warnings) + log2(1 + findbugs_warnings) + 
+    log2(1 + jlint_warnings) + new_security_warnings_present + 
+    new_warnings_present + build_failed, family = binomial(), 
+    control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0478  -0.7225  -0.5508  -0.5508   1.9802  
+
+Coefficients:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       -1.80894    0.06603 -27.396  < 2e-16 ***
+log2(1 + new_security_warnings)   -0.11521    0.34130  -0.338   0.7357    
+log2(1 + security_warnings)       -0.10535    0.05625  -1.873   0.0611 .  
+log2(1 + new_findbugs_warnings)    0.06483    0.23388   0.277   0.7816    
+log2(1 + new_jlint_warnings)      -0.10870    0.13877  -0.783   0.4334    
+log2(1 + findbugs_warnings)        0.15096    0.04994   3.023   0.0025 ** 
+log2(1 + jlint_warnings)           0.28277    0.03641   7.767 8.06e-15 ***
+new_security_warnings_presentTRUE  0.30241    0.50437   0.600   0.5488    
+new_warnings_presentTRUE           1.28440    0.28447   4.515 6.33e-06 ***
+build_failedTRUE                   1.25964    0.16345   7.706 1.29e-14 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3635.5  on 3313  degrees of freedom
+Residual deviance: 3366.2  on 3304  degrees of freedom
+AIC: 3386.2
+
+Number of Fisher Scoring iterations: 4
+
+                      (Intercept)   log2(1 + new_security_warnings) 
+                        0.1638275                         0.8911832 
+      log2(1 + security_warnings)   log2(1 + new_findbugs_warnings) 
+                        0.9000064                         1.0669811 
+     log2(1 + new_jlint_warnings)       log2(1 + findbugs_warnings) 
+                        0.8969954                         1.1629524 
+         log2(1 + jlint_warnings) new_security_warnings_presentTRUE 
+                        1.3267990                         1.3531106 
+         new_warnings_presentTRUE                  build_failedTRUE 
+                        3.6125122                         3.5241613 
+[1] "d2 =  0.0740753727547587"
+[1] "model X - with build failure"
+
+Call:
+glm(formula = contains_bug ~ log2(1 + ns) + log2(1 + la) + log2(1 + 
+    ld) + log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + age) + 
+    log2(1 + exp) + log2(1 + rexp) + log2(1 + new_security_warnings) + 
+    log2(1 + security_warnings) + log2(1 + new_findbugs_warnings) + 
+    log2(1 + new_jlint_warnings) + log2(1 + findbugs_warnings) + 
+    log2(1 + jlint_warnings) + new_security_warnings_present + 
+    new_warnings_present + build_failed, family = binomial(), 
+    control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.6157  -0.6772  -0.4322  -0.2205   2.5833  
+
+Coefficients:
+                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       -2.95039    0.35164  -8.390  < 2e-16 ***
+log2(1 + ns)                       0.02341    0.35388   0.066  0.94726    
+log2(1 + la)                       0.34049    0.02379  14.312  < 2e-16 ***
+log2(1 + ld)                      -0.05225    0.02180  -2.396  0.01655 *  
+log2(1 + lt)                       0.25599    0.02782   9.203  < 2e-16 ***
+fixTRUE                            0.29151    0.11757   2.479  0.01316 *  
+log2(1 + ndev)                    -0.71327    0.06645 -10.733  < 2e-16 ***
+log2(1 + age)                      0.05074    0.01935   2.622  0.00875 ** 
+log2(1 + exp)                      0.07770    0.01655   4.694 2.68e-06 ***
+log2(1 + rexp)                    -0.03194    0.02289  -1.395  0.16297    
+log2(1 + new_security_warnings)   -0.39167    0.34382  -1.139  0.25462    
+log2(1 + security_warnings)       -0.03174    0.06030  -0.526  0.59869    
+log2(1 + new_findbugs_warnings)    0.05162    0.23951   0.216  0.82936    
+log2(1 + new_jlint_warnings)      -0.12319    0.14778  -0.834  0.40450    
+log2(1 + findbugs_warnings)        0.04778    0.05365   0.891  0.37315    
+log2(1 + jlint_warnings)           0.13249    0.04316   3.070  0.00214 ** 
+new_security_warnings_presentTRUE  0.73212    0.52678   1.390  0.16459    
+new_warnings_presentTRUE           0.63583    0.31560   2.015  0.04394 *  
+build_failedTRUE                   0.99834    0.18503   5.396 6.83e-08 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 3614.9  on 3288  degrees of freedom
+Residual deviance: 2931.8  on 3270  degrees of freedom
+  (25 observations deleted due to missingness)
+AIC: 2969.8
+
+Number of Fisher Scoring iterations: 5
+
+                      (Intercept)                      log2(1 + ns) 
+                       0.05231938                        1.02368646 
+                     log2(1 + la)                      log2(1 + ld) 
+                       1.40563399                        0.94909246 
+                     log2(1 + lt)                           fixTRUE 
+                       1.29174452                        1.33844357 
+                   log2(1 + ndev)                     log2(1 + age) 
+                       0.49003900                        1.05204871 
+                    log2(1 + exp)                    log2(1 + rexp) 
+                       1.08079511                        0.96856500 
+  log2(1 + new_security_warnings)       log2(1 + security_warnings) 
+                       0.67592381                        0.96876065 
+  log2(1 + new_findbugs_warnings)      log2(1 + new_jlint_warnings) 
+                       1.05297770                        0.88409799 
+      log2(1 + findbugs_warnings)          log2(1 + jlint_warnings) 
+                       1.04894506                        1.14166712 
+new_security_warnings_presentTRUE          new_warnings_presentTRUE 
+                       2.07949071                        1.88859730 
+                 build_failedTRUE 
+                       2.71378376 
+[1] "d2 =  0.18895905329946"

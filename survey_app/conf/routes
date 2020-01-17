@@ -1,0 +1,28 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+GET     /v1/repo                    controllers.Repo.all
+GET     /v1/repo/:repoId/commits            controllers.Repo.commits(repoId)
+GET     /v1/repo/:repoId/commit/:commit/build_log controllers.Repo.commitBuildLog(repoId, commit)
+GET     /v1/repo/:repoId/commit/:commit/warnings controllers.Repo.commitWarnings(repoId, commit)
+
+GET     /api/admin/review     controllers.SurveyController.getCommitsWithWarnings
+GET     /api/admin/review/message/:project/:commit     controllers.SurveyController.generateSurvey(project, commit)
+GET     /api/admin/review/message/:project/:commit/sent     controllers.SurveyController.emailSent(project, commit)
+
+POST    /api/review/:repo/:commit/warning/$warning<[0-9]+> controllers.SurveyController.saveSurvey(repo, commit, warning: Int)
+GET     /api/review/:repo/:commit/$key<[0-9]+>  controllers.SurveyController.getSurvey(repo, commit, key: Long)
+
+GET     /unsubscribe/:project/:commit controllers.SurveyController.unsubscribe(project, commit)
+
+GET     /api/*notFound              controllers.Application.notFound(notFound)
+
+# Map 404 to an index bis
+GET     /*others                    controllers.Application.other(others)

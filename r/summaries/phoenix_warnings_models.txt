@@ -1,0 +1,294 @@
+    fix          contains_bug          ns               nd         
+ Mode :logical   Mode :logical   Min.   : 0.000   Min.   :  0.000  
+ FALSE:1534      FALSE:1452      1st Qu.: 1.000   1st Qu.:  1.000  
+ TRUE :358       TRUE :440       Median : 1.000   Median :  2.000  
+ NA's :0         NA's :0         Mean   : 1.247   Mean   :  3.568  
+                                 3rd Qu.: 1.000   3rd Qu.:  4.000  
+                                 Max.   :14.000   Max.   :193.000  
+       nf              entrophy            la                 ld          
+ Min.   :   0.000   Min.   :0.0000   Min.   :     0.0   Min.   :     0.0  
+ 1st Qu.:   1.000   1st Qu.:0.0000   1st Qu.:     5.0   1st Qu.:     1.0  
+ Median :   2.000   Median :0.9183   Median :    32.0   Median :     8.0  
+ Mean   :   8.614   Mean   :1.1656   Mean   :   414.1   Mean   :   186.7  
+ 3rd Qu.:   5.250   3rd Qu.:1.8212   3rd Qu.:   139.5   3rd Qu.:    42.0  
+ Max.   :1599.000   Max.   :9.6264   Max.   :145908.0   Max.   :124657.0  
+       lt              ndev            age                nuc         
+ Min.   : -14.5   Min.   : 0.00   Min.   :-10.8640   Min.   :   0.00  
+ 1st Qu.:  93.0   1st Qu.: 5.00   1st Qu.:  0.3519   1st Qu.:   3.00  
+ Median : 309.6   Median :13.00   Median :  8.3233   Median :  19.00  
+ Mean   : 509.6   Mean   :14.74   Mean   : 35.1411   Mean   :  71.64  
+ 3rd Qu.: 679.2   3rd Qu.:24.00   3rd Qu.: 42.7681   3rd Qu.:  70.00  
+ Max.   :7139.0   Max.   :33.00   Max.   :787.8814   Max.   :2180.00  
+      exp              rexp               sexp         warnings      
+ Min.   :   0.0   Min.   :-124.761   Min.   :   0.0   Mode :logical  
+ 1st Qu.:  21.5   1st Qu.:   1.002   1st Qu.:   7.0   FALSE:770      
+ Median : 276.0   Median :   1.024   Median :  78.5   TRUE :1122     
+ Mean   :1859.9   Mean   :   6.463   Mean   :1024.4   NA's :0        
+ 3rd Qu.:3964.5   3rd Qu.:   1.197   3rd Qu.:1725.5                  
+ Max.   :7137.5   Max.   :1417.393   Max.   :5315.0                  
+ new_warnings    jlint_warnings   new_jlint_warnings findbugs_warnings 
+ Mode :logical   Min.   :  0.00   Min.   :  0.0000   Min.   :   0.000  
+ FALSE:1787      1st Qu.:  0.00   1st Qu.:  0.0000   1st Qu.:   0.000  
+ TRUE :105       Median :  2.00   Median :  0.0000   Median :   0.000  
+ NA's :0         Mean   : 17.32   Mean   :  0.3509   Mean   :   3.937  
+                 3rd Qu.: 19.00   3rd Qu.:  0.0000   3rd Qu.:   0.000  
+                 Max.   :586.00   Max.   :163.0000   Max.   :1137.000  
+ new_findbugs_warnings security_warnings new_security_warnings
+ Min.   : 0.00000      Mode :logical     Mode :logical        
+ 1st Qu.: 0.00000      FALSE:1108        FALSE:1861           
+ Median : 0.00000      TRUE :784         TRUE :31             
+ Mean   : 0.09197      NA's :0           NA's :0              
+ 3rd Qu.: 0.00000                                             
+ Max.   :71.00000                                             
+ fallback_warnings fallback_security_warnings build_failed      w_bool       
+ Mode :logical     Mode :logical              Mode :logical   Mode :logical  
+ FALSE:1447        FALSE:1606                 FALSE:1718      FALSE:770      
+ TRUE :445         TRUE :286                  TRUE :174       TRUE :1122     
+ NA's :0           NA's :0                    NA's :0         NA's :0        
+                                                                             
+                                                                             
+[1] "Predicting warnings"
+
+Call:
+glm(formula = warnings ~ ns + nd + nf + entrophy + la + ld + 
+    lt + ndev + age + nuc + exp + rexp + sexp + contains_bug + 
+    fix, family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.3891  -1.0003   0.3493   0.9466   2.2498  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)       2.921e-01  1.394e-01   2.096  0.03609 *  
+ns               -8.444e-01  1.136e-01  -7.435 1.05e-13 ***
+nd                1.611e-01  4.984e-02   3.233  0.00123 ** 
+nf                1.062e-02  1.035e-02   1.027  0.30463    
+entrophy          3.690e-01  8.470e-02   4.357 1.32e-05 ***
+la               -6.507e-04  1.526e-04  -4.264 2.01e-05 ***
+ld                4.081e-04  1.558e-04   2.619  0.00882 ** 
+lt                1.160e-03  1.354e-04   8.568  < 2e-16 ***
+ndev             -4.064e-02  6.106e-03  -6.656 2.81e-11 ***
+age               8.679e-04  8.169e-04   1.062  0.28804    
+nuc               4.561e-03  1.159e-03   3.936 8.27e-05 ***
+exp              -3.150e-04  5.804e-05  -5.428 5.70e-08 ***
+rexp              1.846e-05  1.071e-03   0.017  0.98624    
+sexp              6.178e-04  8.741e-05   7.068 1.57e-12 ***
+contains_bugTRUE  2.688e-01  1.504e-01   1.787  0.07392 .  
+fixTRUE          -3.451e-03  1.371e-01  -0.025  0.97993    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2557.0  on 1891  degrees of freedom
+Residual deviance: 1998.5  on 1876  degrees of freedom
+AIC: 2030.5
+
+Number of Fisher Scoring iterations: 6
+
+     (Intercept)               ns               nd               nf 
+       1.3392755        0.4298174        1.1748025        1.0106786 
+        entrophy               la               ld               lt 
+       1.4463343        0.9993496        1.0004082        1.0011608 
+            ndev              age              nuc              exp 
+       0.9601731        1.0008683        1.0045711        0.9996850 
+            rexp             sexp contains_bugTRUE          fixTRUE 
+       1.0000185        1.0006180        1.3083560        0.9965554 
+[1] "d2 =  0.218401261469579"
+[1] "Predicting new warnings"
+
+Call:
+glm(formula = new_warnings ~ ns + nd + nf + entrophy + la + ld + 
+    lt + ndev + age + nuc + exp + rexp + sexp + contains_bug + 
+    fix, family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0236  -0.3374  -0.2491  -0.1944   3.1054  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      -3.640e+00  3.109e-01 -11.709  < 2e-16 ***
+ns               -3.687e-01  1.487e-01  -2.479  0.01318 *  
+nd                2.464e-02  3.667e-02   0.672  0.50171    
+nf               -5.743e-03  3.759e-03  -1.528  0.12659    
+entrophy          5.401e-01  1.077e-01   5.014 5.32e-07 ***
+la               -2.760e-05  6.849e-05  -0.403  0.68694    
+ld                8.674e-05  8.139e-05   1.066  0.28660    
+lt               -8.571e-04  3.211e-04  -2.669  0.00761 ** 
+ndev              3.629e-02  1.203e-02   3.017  0.00255 ** 
+age               5.025e-05  1.718e-03   0.029  0.97667    
+nuc               1.347e-03  5.569e-04   2.418  0.01561 *  
+exp              -1.423e-04  1.018e-04  -1.397  0.16235    
+rexp             -1.479e-03  5.457e-03  -0.271  0.78632    
+sexp              1.748e-04  1.520e-04   1.150  0.25003    
+contains_bugTRUE  9.008e-02  2.504e-01   0.360  0.71901    
+fixTRUE           1.252e-01  2.918e-01   0.429  0.66785    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 811.26  on 1891  degrees of freedom
+Residual deviance: 696.92  on 1876  degrees of freedom
+AIC: 728.92
+
+Number of Fisher Scoring iterations: 7
+
+     (Intercept)               ns               nd               nf 
+      0.02625148       0.69165252       1.02494313       0.99427369 
+        entrophy               la               ld               lt 
+      1.71611669       0.99997240       1.00008674       0.99914323 
+            ndev              age              nuc              exp 
+      1.03695865       1.00005025       1.00134742       0.99985771 
+            rexp             sexp contains_bugTRUE          fixTRUE 
+      0.99852170       1.00017481       1.09426338       1.13338945 
+[1] "d2 =  0.140937562864289"
+[1] "Predicting security warnings"
+
+Call:
+glm(formula = security_warnings ~ ns + nd + nf + entrophy + la + 
+    ld + lt + ndev + age + nuc + exp + rexp + sexp + contains_bug + 
+    fix, family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.0489  -0.7556  -0.4093   0.7680   2.4678  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      -2.796e-01  1.572e-01  -1.778 0.075334 .  
+ns               -1.081e+00  1.418e-01  -7.623 2.48e-14 ***
+nd                2.184e-01  4.563e-02   4.786 1.70e-06 ***
+nf               -1.108e-02  8.809e-03  -1.257 0.208589    
+entrophy          3.287e-01  8.193e-02   4.012 6.02e-05 ***
+la               -4.618e-04  1.361e-04  -3.392 0.000693 ***
+ld                3.961e-04  1.399e-04   2.832 0.004628 ** 
+lt                1.522e-03  1.311e-04  11.609  < 2e-16 ***
+ndev             -7.157e-02  7.333e-03  -9.759  < 2e-16 ***
+age              -1.367e-03  1.066e-03  -1.283 0.199535    
+nuc               5.241e-03  1.017e-03   5.151 2.60e-07 ***
+exp              -1.403e-04  6.199e-05  -2.263 0.023627 *  
+rexp              6.531e-04  1.160e-03   0.563 0.573443    
+sexp              3.278e-04  9.341e-05   3.509 0.000449 ***
+contains_bugTRUE  4.577e-01  1.481e-01   3.091 0.001996 ** 
+fixTRUE           7.735e-02  1.496e-01   0.517 0.605123    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2567.1  on 1891  degrees of freedom
+Residual deviance: 1828.1  on 1876  degrees of freedom
+AIC: 1860.1
+
+Number of Fisher Scoring iterations: 7
+
+     (Intercept)               ns               nd               nf 
+       0.7560654        0.3391649        1.2440847        0.9889838 
+        entrophy               la               ld               lt 
+       1.3891298        0.9995384        1.0003962        1.0015229 
+            ndev              age              nuc              exp 
+       0.9309350        0.9986338        1.0052544        0.9998597 
+            rexp             sexp contains_bugTRUE          fixTRUE 
+       1.0006533        1.0003279        1.5804331        1.0804225 
+[1] "d2 =  0.287858284137806"
+[1] "Predicting new security warnings"
+
+Call:
+glm(formula = new_security_warnings ~ ns + nd + nf + entrophy + 
+    la + ld + lt + ndev + age + nuc + exp + rexp + sexp + contains_bug + 
+    fix, family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7918  -0.1808  -0.1293  -0.0881   3.3493  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      -4.683e+00  4.953e-01  -9.455  < 2e-16 ***
+ns               -1.636e-01  1.579e-01  -1.036  0.30031    
+nd                8.425e-03  4.282e-02   0.197  0.84403    
+nf               -8.034e-03  6.094e-03  -1.318  0.18740    
+entrophy          5.468e-01  1.783e-01   3.067  0.00216 ** 
+la                2.028e-05  5.029e-05   0.403  0.68672    
+ld                8.027e-05  6.651e-05   1.207  0.22748    
+lt               -2.454e-04  5.028e-04  -0.488  0.62545    
+ndev             -4.701e-03  2.194e-02  -0.214  0.83034    
+age              -1.529e-03  4.055e-03  -0.377  0.70615    
+nuc               1.477e-03  7.085e-04   2.085  0.03711 *  
+exp               4.906e-05  1.185e-04   0.414  0.67901    
+rexp             -4.028e-02  2.816e-02  -1.430  0.15260    
+sexp             -6.052e-04  3.030e-04  -1.997  0.04579 *  
+contains_bugTRUE  1.427e-01  4.469e-01   0.319  0.74942    
+fixTRUE           9.072e-01  4.470e-01   2.030  0.04239 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 316.40  on 1891  degrees of freedom
+Residual deviance: 264.07  on 1876  degrees of freedom
+AIC: 296.07
+
+Number of Fisher Scoring iterations: 11
+
+     (Intercept)               ns               nd               nf 
+     0.009249429      0.849084483      1.008460150      0.991998167 
+        entrophy               la               ld               lt 
+     1.727763397      1.000020282      1.000080269      0.999754600 
+            ndev              age              nuc              exp 
+     0.995310046      0.998472299      1.001478072      1.000049060 
+            rexp             sexp contains_bugTRUE          fixTRUE 
+     0.960523338      0.999394938      1.153439347      2.477373454 
+[1] "d2 =  0.165394167570654"
+[1] "Predicting build failures"
+
+Call:
+glm(formula = new_security_warnings ~ ns + nd + nf + entrophy + 
+    la + ld + lt + ndev + age + nuc + exp + rexp + sexp + contains_bug + 
+    fix, family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7918  -0.1808  -0.1293  -0.0881   3.3493  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)      -4.683e+00  4.953e-01  -9.455  < 2e-16 ***
+ns               -1.636e-01  1.579e-01  -1.036  0.30031    
+nd                8.425e-03  4.282e-02   0.197  0.84403    
+nf               -8.034e-03  6.094e-03  -1.318  0.18740    
+entrophy          5.468e-01  1.783e-01   3.067  0.00216 ** 
+la                2.028e-05  5.029e-05   0.403  0.68672    
+ld                8.027e-05  6.651e-05   1.207  0.22748    
+lt               -2.454e-04  5.028e-04  -0.488  0.62545    
+ndev             -4.701e-03  2.194e-02  -0.214  0.83034    
+age              -1.529e-03  4.055e-03  -0.377  0.70615    
+nuc               1.477e-03  7.085e-04   2.085  0.03711 *  
+exp               4.906e-05  1.185e-04   0.414  0.67901    
+rexp             -4.028e-02  2.816e-02  -1.430  0.15260    
+sexp             -6.052e-04  3.030e-04  -1.997  0.04579 *  
+contains_bugTRUE  1.427e-01  4.469e-01   0.319  0.74942    
+fixTRUE           9.072e-01  4.470e-01   2.030  0.04239 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 316.40  on 1891  degrees of freedom
+Residual deviance: 264.07  on 1876  degrees of freedom
+AIC: 296.07
+
+Number of Fisher Scoring iterations: 11
+
+     (Intercept)               ns               nd               nf 
+     0.009249429      0.849084483      1.008460150      0.991998167 
+        entrophy               la               ld               lt 
+     1.727763397      1.000020282      1.000080269      0.999754600 
+            ndev              age              nuc              exp 
+     0.995310046      0.998472299      1.001478072      1.000049060 
+            rexp             sexp contains_bugTRUE          fixTRUE 
+     0.960523338      0.999394938      1.153439347      2.477373454 
+[1] "d2 =  0.165394167570654"

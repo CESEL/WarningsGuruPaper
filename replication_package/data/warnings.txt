@@ -1,0 +1,29 @@
+select count(*) from static_commit_line_warning;
+
+ count
+--------
+ 684926
+
+select count(*) from static_commit_warnings_processed;
+
+ count
+--------
+ 940937
+
+select count(*) as failed_w_warnings
+from (select count(*) from static_commit_warnings_processed as w, static_commit_processed as c
+where (w.repo, w.commit) = (c.repo, c.commit) and c.build = 'FAILURE'
+group by w.repo, w.commit) as rec;
+
+ failed_w_warnings
+-------------------
+              7345
+
+select count(*) as failed_w_new_warnings
+from (select count(*) from static_commit_warnings_processed as w, static_commit_processed as c
+where (w.repo, w.commit) = (c.repo, c.commit) and c.build = 'FAILURE' and w.new_warning
+group by w.repo, w.commit) as rec;
+
+ failed_w_new_warnings
+-----------------------
+                  1494

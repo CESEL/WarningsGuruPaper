@@ -1,0 +1,34 @@
+select count(*) as failed_commits,
+   count(*) filter (where warnings > 0) as failed_commits_w_warning,
+   round(100.0 * (count(*) filter (where warnings > 0)) / count(*), 2) as f_w_w_perc,
+   count(*) filter (where recovered_warnings > 0) as failed_commits_w_warning_recovered,
+   round(100.0 * (count(*) filter (where recovered_warnings > 0)) / count(*), 2) as f_w_w_r_perc
+   from commit_warning_recovered_summary
+   where build='FAILURE';
+
+ failed_commits | failed_commits_w_warning | f_w_w_perc | failed_commits_w_warning_recovered | f_w_w_r_perc
+----------------+--------------------------+------------+------------------------------------+--------------
+          12667 |                     7345 |      57.99 |                               7084 |        55.92
+
+
+select repo_name, repo,
+   count(*) as failed_commits,
+   count(*) filter (where warnings > 0) as failed_commits_w_warning,
+   round(100.0 * (count(*) filter (where warnings > 0)) / count(*), 2) as f_w_w_perc,
+   count(*) filter (where recovered_warnings > 0) as failed_commits_w_warning_recovered,
+   round(100.0 * (count(*) filter (where recovered_warnings > 0)) / count(*), 2) as f_w_w_r_perc
+   from commit_warning_recovered_summary
+   where build='FAILURE'
+   group by repo_name, repo
+   order by repo_name;
+
+  repo_name   |                 repo                 | failed_commits | failed_commits_w_warning | f_w_w_perc | failed_commits_w_warning_recovered | f_w_w_r_perc
+--------------+--------------------------------------+----------------+--------------------------+------------+------------------------------------+--------------
+ commons-lang | 5cd11632-8fb7-4acf-a8ac-6831e0e693a2 |            191 |                       94 |      49.21 |                                 91 |        47.64
+ hadoop       | d3ec77b3-b0ed-4e3a-9699-3217b7b601cb |           5098 |                     3355 |      65.81 |                               3300 |        64.73
+ ignite       | f420b374-295f-44cc-ae88-4753404ef1f0 |            762 |                      373 |      48.95 |                                274 |        35.96
+ kylin        | 78da3c6e-a7fd-47b4-a9ec-031d81704622 |            665 |                      382 |      57.44 |                                382 |        57.44
+ phoenix      | 42e73e16-e20a-4b17-99a3-4dd7b35a6155 |             74 |                       45 |      60.81 |                                 43 |        58.11
+ ranger       | b811c1aa-4065-44a6-a69c-c76ed821392c |            952 |                      529 |      55.57 |                                455 |        47.79
+ tika         | e6d6b0c0-42cc-4bb1-adb5-a8df6844dd2e |            179 |                      101 |      56.42 |                                 89 |        49.72
+ wicket       | 55a40844-8e8a-4910-9e2a-47b2caf478dc |           4746 |                     2466 |      51.96 |                               2450 |        51.62

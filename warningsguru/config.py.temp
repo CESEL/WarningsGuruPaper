@@ -1,0 +1,103 @@
+"""
+The MIT License (MIT)
+
+Copyright (c) 2016
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
+
+"""
+Settings for the staticguru tool
+"""
+
+import os
+import pwd
+from datetime import date
+
+BACKGROUND_SLEEP_MINUTES = 10
+
+# Set the path
+COMMITGURU_REPOSITORY_PATH = "/{path_to_commitguru_code_analyser}/ingester/CASRepos/git"
+REPOSITORY_CACHE_PATH = "/{full_path_to_static_guru_installation}/staticguru/repos/git"
+
+DATABASE_HOST = "DATABASE_HOST"
+DATABASE_PORT = "DATABASE_PORT"
+DATABASE_NAME = "DATABASE_NAME"
+DATABASE_USERNAME = "DATABASE_USERNAME"
+DATABASE_PASSWORD = "DATABASE_PASSWORD"
+
+DATABASE_SETTINGS = {
+    "DATABASE_HOST": "hostname",
+    "DATABASE_PORT": "port",
+    "DATABASE_NAME": "database name",
+    "DATABASE_USERNAME": "username",
+    "DATABASE_PASSWORD": "password"
+}
+
+# Will only run one repo from commitguru if specified
+# REPO_TO_ANALYSE = "42e73e16-e20a-4b17-99a3-4dd7b35a6155"
+# If a list of commitguru repos is provided it will run on all of the specified repositories
+# REPO_TO_ANALYSE = ["42e73e16-e20a-4b17-99a3-4dd7b35a6155", "78da3c6e-a7fd-47b4-a9ec-031d81704622"]
+# If no repo is specified it will run on all of them
+REPO_TO_ANALYSE = None
+
+# Specify other jdks to allow legacy commits to be compiled correctly on older jdks where newer jdks don't build for
+# legacy targets correctly
+OVERRIDES = {
+    # "JDK": [
+    #     {"version": "1.7.0", "path": "/usr/lib/jvm/jdk1.7.0_79/", "end_date": date(2014, 3, 18)}
+    # ],
+    # "MVN": [
+    #     {"version": "3.0.5", "path": "/usr/lib/jvm/jdk1.7.0_79/", "end_date": date(2014, 3, 18)}
+    # ]
+}
+
+# If TOIF is not configured in session
+TOIF_EXECUTABLE = "/{path to toif binary}/toif"
+
+ADAPTOR_OUTPUT_DIR = "target/toif_run"
+KDM_FILE = "assimilated.kdm"
+
+# StaticGuru can save the build artifacts. I enabled it will create a tar.gz of build artifacts, excluding jars, zips and other compressed artifacts
+ARTIFACT_ARCHIVER = False
+ARTIFACT_ARCHIVER_PATH = "path/to/archive"
+
+REPROCESS_FAILURES_HOURS = 1
+
+# Configure maven options for build
+MAVEN_OPTS = "-Xmx512m -XX:MaxPermSize=256m"
+
+def get_local_settings():
+
+    username = __get_username__()
+
+    if "DATABASE_HOST" in DATABASE_SETTINGS:
+        return DATABASE_SETTINGS
+    else:
+        print("Database settings need to be defined")
+
+
+def __get_username__():
+    return pwd.getpwuid(os.getuid()).pw_name
+
+
+if __name__ == "__main__":
+    # Helps you find out your username
+    print("Your username is: '%s'" % __get_username__())
+
+
+
+

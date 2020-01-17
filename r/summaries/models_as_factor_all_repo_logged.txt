@@ -1,0 +1,273 @@
+  new_warnings    
+ Min.   :  1.000  
+ 1st Qu.:  1.000  
+ Median :  2.000  
+ Mean   :  4.355  
+ 3rd Qu.:  4.000  
+ Max.   :307.000  
+    fix          contains_bug     repo_name               ns        
+ Mode :logical   Mode :logical   Length:45949       Min.   : 0.000  
+ FALSE:35741     FALSE:34681     Class :character   1st Qu.: 1.000  
+ TRUE :10208     TRUE :11268     Mode  :character   Median : 1.000  
+ NA's :0         NA's :0                            Mean   : 1.296  
+                                                    3rd Qu.: 1.000  
+                                                    Max.   :44.000  
+       la                  ld                  lt             ndev       
+ Min.   :      0.0   Min.   :      0.0   Min.   :    0   Min.   :  0.00  
+ 1st Qu.:      3.0   1st Qu.:      1.0   1st Qu.:  129   1st Qu.: 14.00  
+ Median :     16.0   Median :      4.0   Median :  395   Median : 23.00  
+ Mean   :    432.2   Mean   :    284.3   Mean   : 1263   Mean   : 34.19  
+ 3rd Qu.:     81.0   3rd Qu.:     23.0   3rd Qu.: 1365   3rd Qu.: 45.00  
+ Max.   :1665281.0   Max.   :1509950.0   Max.   :69994   Max.   :125.00  
+      age                 exp               rexp          jlint_warnings    
+ Min.   :   0.0000   Min.   :    0.0   Min.   :    0.00   Min.   :   0.000  
+ 1st Qu.:   0.5574   1st Qu.:  163.5   1st Qu.:    1.01   1st Qu.:   0.000  
+ Median :  10.7678   Median :  994.0   Median :    1.09   Median :   0.000  
+ Mean   :  54.1576   Mean   : 3807.6   Mean   :   44.17   Mean   :   9.644  
+ 3rd Qu.:  52.5456   3rd Qu.: 4058.0   3rd Qu.:    2.20   3rd Qu.:   5.000  
+ Max.   :2877.3140   Max.   :53931.5   Max.   :43201.06   Max.   :2562.000  
+ new_jlint_warnings findbugs_warnings  new_findbugs_warnings security_warnings 
+ Min.   :  0.0000   Min.   :   0.000   Min.   : 0.00000      Min.   :   0.000  
+ 1st Qu.:  0.0000   1st Qu.:   0.000   1st Qu.: 0.00000      1st Qu.:   0.000  
+ Median :  0.0000   Median :   0.000   Median : 0.00000      Median :   0.000  
+ Mean   :  0.2549   Mean   :   2.275   Mean   : 0.09898      Mean   :   3.566  
+ 3rd Qu.:  0.0000   3rd Qu.:   0.000   3rd Qu.: 0.00000      3rd Qu.:   1.000  
+ Max.   :307.0000   Max.   :2000.000   Max.   :80.00000      Max.   :1790.000  
+ new_security_warnings fallback_warnings fallback_security_warnings
+ Min.   : 0.0000       Mode :logical     Mode :logical             
+ 1st Qu.: 0.0000       FALSE:40200       FALSE:43073               
+ Median : 0.0000       TRUE :5749        TRUE :2876                
+ Mean   : 0.1179       NA's :0           NA's :0                   
+ 3rd Qu.: 0.0000                                                   
+ Max.   :92.0000                                                   
+ new_warnings_present new_security_warnings_present build_failed   
+ Mode :logical        Mode :logical                 Mode :logical  
+ FALSE:40200          FALSE:43073                   FALSE:33180    
+ TRUE :5749           TRUE :2876                    TRUE :12769    
+ NA's :0              NA's :0                       NA's :0        
+                                                                   
+                                                                   
+   w_bool       
+ Mode :logical  
+ FALSE:24903    
+ TRUE :21046    
+ NA's :0        
+                
+                
+[1] "model 1"
+
+Call:
+glm(formula = contains_bug ~ log2(1 + ns) + log2(1 + la) + log2(1 + 
+    ld) + log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + age) + 
+    log2(1 + exp) + log2(1 + rexp) + as.factor(repo_name), family = binomial(), 
+    control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.4544  -0.6948  -0.4391  -0.1950   2.8820  
+
+Coefficients:
+                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                 -3.236911   0.074997 -43.161  < 2e-16 ***
+log2(1 + ns)                -0.169662   0.031016  -5.470 4.50e-08 ***
+log2(1 + la)                 0.401233   0.006379  62.896  < 2e-16 ***
+log2(1 + ld)                 0.060017   0.005676  10.573  < 2e-16 ***
+log2(1 + lt)                 0.136616   0.006943  19.677  < 2e-16 ***
+fixTRUE                      0.412173   0.029379  14.029  < 2e-16 ***
+log2(1 + ndev)              -0.281920   0.015843 -17.794  < 2e-16 ***
+log2(1 + age)                0.008624   0.005713   1.510 0.131139    
+log2(1 + exp)                0.053506   0.004266  12.541  < 2e-16 ***
+log2(1 + rexp)              -0.028799   0.008065  -3.571 0.000356 ***
+as.factor(repo_name)hadoop  -0.501680   0.055618  -9.020  < 2e-16 ***
+as.factor(repo_name)ignite  -0.570709   0.069203  -8.247  < 2e-16 ***
+as.factor(repo_name)kylin   -0.025339   0.061324  -0.413 0.679463    
+as.factor(repo_name)phoenix -0.900185   0.078636 -11.448  < 2e-16 ***
+as.factor(repo_name)ranger  -0.716240   0.077656  -9.223  < 2e-16 ***
+as.factor(repo_name)tika    -0.494895   0.065317  -7.577 3.54e-14 ***
+as.factor(repo_name)wicket  -0.203255   0.054885  -3.703 0.000213 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 51190  on 45948  degrees of freedom
+Residual deviance: 41312  on 45932  degrees of freedom
+AIC: 41346
+
+Number of Fisher Scoring iterations: 5
+
+                         GVIF Df GVIF^(1/(2*Df))
+log2(1 + ns)         1.290911  1        1.136183
+log2(1 + la)         1.762196  1        1.327477
+log2(1 + ld)         1.527639  1        1.235977
+log2(1 + lt)         2.672438  1        1.634759
+fix                  1.049611  1        1.024505
+log2(1 + ndev)       3.653605  1        1.911441
+log2(1 + age)        1.492764  1        1.221787
+log2(1 + exp)        1.313711  1        1.146173
+log2(1 + rexp)       1.334168  1        1.155062
+as.factor(repo_name) 3.193521  7        1.086474
+                (Intercept)                log2(1 + ns) 
+                       0.04                        0.84 
+               log2(1 + la)                log2(1 + ld) 
+                       1.49                        1.06 
+               log2(1 + lt)                     fixTRUE 
+                       1.15                        1.51 
+             log2(1 + ndev)               log2(1 + age) 
+                       0.75                        1.01 
+              log2(1 + exp)              log2(1 + rexp) 
+                       1.05                        0.97 
+ as.factor(repo_name)hadoop  as.factor(repo_name)ignite 
+                       0.61                        0.57 
+  as.factor(repo_name)kylin as.factor(repo_name)phoenix 
+                       0.97                        0.41 
+ as.factor(repo_name)ranger    as.factor(repo_name)tika 
+                       0.49                        0.61 
+ as.factor(repo_name)wicket 
+                       0.82 
+[1] "d2 =  0.192973576592053"
+[1] "model 2 -  just warnings"
+
+Call:
+glm(formula = contains_bug ~ log2(1 + new_security_warnings) + 
+    log2(1 + security_warnings) + log2(1 + new_findbugs_warnings) + 
+    log2(1 + new_jlint_warnings) + log2(1 + findbugs_warnings) + 
+    log2(1 + jlint_warnings) + new_security_warnings_present + 
+    new_warnings_present + build_failed + as.factor(repo_name), 
+    family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.2864  -0.7559  -0.5876  -0.4261   2.2568  
+
+Coefficients:
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       -1.608671   0.044136 -36.448  < 2e-16 ***
+log2(1 + new_security_warnings)   -0.016530   0.061341  -0.269 0.787564    
+log2(1 + security_warnings)       -0.056442   0.017956  -3.143 0.001670 ** 
+log2(1 + new_findbugs_warnings)    0.182824   0.053756   3.401 0.000671 ***
+log2(1 + new_jlint_warnings)       0.001298   0.031211   0.042 0.966838    
+log2(1 + findbugs_warnings)        0.019242   0.015870   1.212 0.225329    
+log2(1 + jlint_warnings)           0.194411   0.011458  16.968  < 2e-16 ***
+new_security_warnings_presentTRUE  0.259825   0.069941   3.715 0.000203 ***
+new_warnings_presentTRUE           1.384463   0.049575  27.926  < 2e-16 ***
+build_failedTRUE                   0.944453   0.029237  32.303  < 2e-16 ***
+as.factor(repo_name)hadoop        -0.411808   0.049154  -8.378  < 2e-16 ***
+as.factor(repo_name)ignite        -0.676991   0.060422 -11.204  < 2e-16 ***
+as.factor(repo_name)kylin         -0.060171   0.053808  -1.118 0.263458    
+as.factor(repo_name)phoenix       -0.601799   0.074650  -8.062 7.53e-16 ***
+as.factor(repo_name)ranger        -0.744787   0.074636  -9.979  < 2e-16 ***
+as.factor(repo_name)tika          -0.177717   0.061736  -2.879 0.003994 ** 
+as.factor(repo_name)wicket        -0.211503   0.050065  -4.225 2.39e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 51190  on 45948  degrees of freedom
+Residual deviance: 46312  on 45932  degrees of freedom
+AIC: 46346
+
+Number of Fisher Scoring iterations: 4
+
+                      (Intercept)   log2(1 + new_security_warnings) 
+                             0.20                              0.98 
+      log2(1 + security_warnings)   log2(1 + new_findbugs_warnings) 
+                             0.95                              1.20 
+     log2(1 + new_jlint_warnings)       log2(1 + findbugs_warnings) 
+                             1.00                              1.02 
+         log2(1 + jlint_warnings) new_security_warnings_presentTRUE 
+                             1.21                              1.30 
+         new_warnings_presentTRUE                  build_failedTRUE 
+                             3.99                              2.57 
+       as.factor(repo_name)hadoop        as.factor(repo_name)ignite 
+                             0.66                              0.51 
+        as.factor(repo_name)kylin       as.factor(repo_name)phoenix 
+                             0.94                              0.55 
+       as.factor(repo_name)ranger          as.factor(repo_name)tika 
+                             0.47                              0.84 
+       as.factor(repo_name)wicket 
+                             0.81 
+[1] "d2 =  0.095304089380734"
+[1] "model X - with build failure"
+
+Call:
+glm(formula = contains_bug ~ log2(1 + ns) + log2(1 + la) + log2(1 + 
+    ld) + log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + age) + 
+    log2(1 + exp) + log2(1 + rexp) + log2(1 + new_security_warnings) + 
+    log2(1 + security_warnings) + log2(1 + new_findbugs_warnings) + 
+    log2(1 + new_jlint_warnings) + log2(1 + findbugs_warnings) + 
+    log2(1 + jlint_warnings) + new_security_warnings_present + 
+    new_warnings_present + build_failed + as.factor(repo_name), 
+    family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.4243  -0.6701  -0.4240  -0.1728   2.8885  
+
+Coefficients:
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       -3.342675   0.075972 -43.999  < 2e-16 ***
+log2(1 + ns)                      -0.166461   0.032039  -5.196 2.04e-07 ***
+log2(1 + la)                       0.356201   0.006706  53.115  < 2e-16 ***
+log2(1 + ld)                       0.042816   0.005851   7.318 2.52e-13 ***
+log2(1 + lt)                       0.104818   0.007192  14.574  < 2e-16 ***
+fixTRUE                            0.417478   0.029861  13.981  < 2e-16 ***
+log2(1 + ndev)                    -0.193497   0.016774 -11.536  < 2e-16 ***
+log2(1 + age)                      0.008023   0.005844   1.373   0.1698    
+log2(1 + exp)                      0.046196   0.004397  10.506  < 2e-16 ***
+log2(1 + rexp)                    -0.018578   0.008133  -2.284   0.0224 *  
+log2(1 + new_security_warnings)    0.099766   0.065354   1.527   0.1269    
+log2(1 + security_warnings)       -0.049273   0.019210  -2.565   0.0103 *  
+log2(1 + new_findbugs_warnings)   -0.045287   0.057597  -0.786   0.4317    
+log2(1 + new_jlint_warnings)      -0.183595   0.033538  -5.474 4.39e-08 ***
+log2(1 + findbugs_warnings)        0.037549   0.017865   2.102   0.0356 *  
+log2(1 + jlint_warnings)           0.141662   0.012435  11.392  < 2e-16 ***
+new_security_warnings_presentTRUE  0.086721   0.075108   1.155   0.2482    
+new_warnings_presentTRUE           0.703835   0.053852  13.070  < 2e-16 ***
+build_failedTRUE                   0.734853   0.033132  22.180  < 2e-16 ***
+as.factor(repo_name)hadoop        -0.829289   0.058835 -14.095  < 2e-16 ***
+as.factor(repo_name)ignite        -0.853876   0.071859 -11.883  < 2e-16 ***
+as.factor(repo_name)kylin         -0.070201   0.062610  -1.121   0.2622    
+as.factor(repo_name)phoenix       -1.123553   0.082412 -13.633  < 2e-16 ***
+as.factor(repo_name)ranger        -1.102868   0.081663 -13.505  < 2e-16 ***
+as.factor(repo_name)tika          -0.464941   0.066658  -6.975 3.06e-12 ***
+as.factor(repo_name)wicket        -0.400746   0.057174  -7.009 2.40e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 51190  on 45948  degrees of freedom
+Residual deviance: 40279  on 45923  degrees of freedom
+AIC: 40331
+
+Number of Fisher Scoring iterations: 5
+
+                      (Intercept)                      log2(1 + ns) 
+                             0.04                              0.85 
+                     log2(1 + la)                      log2(1 + ld) 
+                             1.43                              1.04 
+                     log2(1 + lt)                           fixTRUE 
+                             1.11                              1.52 
+                   log2(1 + ndev)                     log2(1 + age) 
+                             0.82                              1.01 
+                    log2(1 + exp)                    log2(1 + rexp) 
+                             1.05                              0.98 
+  log2(1 + new_security_warnings)       log2(1 + security_warnings) 
+                             1.10                              0.95 
+  log2(1 + new_findbugs_warnings)      log2(1 + new_jlint_warnings) 
+                             0.96                              0.83 
+      log2(1 + findbugs_warnings)          log2(1 + jlint_warnings) 
+                             1.04                              1.15 
+new_security_warnings_presentTRUE          new_warnings_presentTRUE 
+                             1.09                              2.02 
+                 build_failedTRUE        as.factor(repo_name)hadoop 
+                             2.09                              0.44 
+       as.factor(repo_name)ignite         as.factor(repo_name)kylin 
+                             0.43                              0.93 
+      as.factor(repo_name)phoenix        as.factor(repo_name)ranger 
+                             0.33                              0.33 
+         as.factor(repo_name)tika        as.factor(repo_name)wicket 
+                             0.63                              0.67 
+[1] "d2 =  0.213143157189088"

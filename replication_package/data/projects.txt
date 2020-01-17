@@ -1,0 +1,27 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+select name,
+date_trunc('day',  	to_timestamp(cast(max(author_date_unix_timestamp) as double precision))) as newest_commit,
+b.last_build,
+date_trunc('day',  	to_timestamp(cast(min(author_date_unix_timestamp) as double precision))) as oldest_commit,
+count(*)
+from repositories as r, commits as c, (select repo,
+                                       date_trunc('day',  	to_timestamp(cast(min(author_date_unix_timestamp) as double precision))) as last_build
+                                       from commits as c, static_commit_processed as p
+                                       where p.repo = c.repository_id and p.commit = c.commit_hash and build in ('BUILD', 'FAILURE')
+                                       group by repo) as b
+where r.id = c.repository_id and r.id in (Select distinct repo from static_commit_processed)
+and b.repo = r.id
+group by name, id, b.last_build order by name;
+
+     name     |     newest_commit      |       last_build       |     oldest_commit      | count
+--------------+------------------------+------------------------+------------------------+-------
+ commons-lang | 2017-02-04 00:00:00-05 | 2006-11-11 00:00:00-05 | 2002-07-18 00:00:00-04 |  4838
+ hadoop       | 2017-02-03 00:00:00-05 | 2011-08-02 00:00:00-04 | 2009-05-19 00:00:00-04 | 15351
+ ignite       | 2017-02-03 00:00:00-05 | 2015-05-29 00:00:00-04 | 2014-02-20 00:00:00-05 | 18523
+ kylin        | 2017-02-04 00:00:00-05 | 2014-10-02 00:00:00-04 | 2014-05-13 00:00:00-04 |  5764
+ phoenix      | 2017-02-03 00:00:00-05 | 2014-01-27 00:00:00-05 | 2014-01-27 00:00:00-05 |  1892
+ ranger       | 2017-02-06 00:00:00-05 | 2014-08-14 00:00:00-04 | 2014-08-14 00:00:00-04 |  1914
+ tika         | 2017-02-02 00:00:00-05 | 2007-03-31 00:00:00-04 | 2007-03-31 00:00:00-04 |  3347
+ wicket       | 2017-02-04 00:00:00-05 | 2006-06-29 00:00:00-04 | 2004-09-21 00:00:00-04 | 19742
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

@@ -1,0 +1,19 @@
+select
+   count(*) as commits,
+   count(*) filter (where build in ('BUILD', 'FAILURE')) as comp_commits,
+   count(*) filter (where build='BUILD') as BUILD,
+   round(100.0 * (count(*) filter (where build='BUILD')) / count(*), 2) as B_PERC,
+   count(*) filter (where build='FAILURE') as FAILURE,
+   round(100.0 * (count(*) filter (where build='FAILURE')) / count(*), 2) as F_PERC,
+   count(*) filter (where build is null) as QUEUED,
+   round(100.0 * (count(*) filter (where build='QUEUED')) / count(*), 2) as Q_PERC,
+   count(*) filter (where build='MISSING POM') as NO_POM,
+   round(100.0 * (count(*) filter (where build='MISSING POM')) / count(*), 2) as N_PERC,
+   round(100.0 * (count(*) filter (where build='BUILD')) / (count(*) filter (where build in ('BUILD', 'FAILURE'))), 2) as b_vs_f_PERC
+   from static_commit_processed as p, repositories as r where r.id = p.repo ;
+
+ commits | build | b_perc | failure | f_perc | queued | q_perc | no_pom | n_perc | b_vs_f_perc
+---------+-------+--------+---------+--------+--------+--------+--------+--------+-------------
+   57214 | 33282 |  58.17 |   12667 |  22.14 |      0 |   0.00 |  11265 |  19.69 |       72.43
+
+

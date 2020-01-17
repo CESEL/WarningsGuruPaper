@@ -1,0 +1,30 @@
+- commits with certain type of warnings
+select
+   count(*) as commits,
+   count(*) filter (where warnings > 0) as w,
+   round(100.0 * (count(*) filter (where warnings > 0)) / count(*), 2) as w_PERC,
+   count(*) filter (where new_warnings > 0) as n_w,
+   round(100.0 * (count(*) filter (where new_warnings > 0)) / count(*), 2) as n_w_PERC,
+  count(*) filter (where security_warnings > 0) as s_w,
+  round(100.0 * (count(*) filter (where security_warnings > 0) ) / count(*), 2) as s_w_PERC,
+  count(*) filter (where new_security_warnings > 0) as n_s_w,
+  round(100.0 * (count(*) filter (where new_security_warnings > 0)) / count(*), 2) as n_s_w_PERC
+   from commit_warning_recovered_summary;
+
+ commits |   w   | w_perc | n_w  | n_w_perc |  s_w  | s_w_perc | n_s_w | n_s_w_perc
+---------+-------+--------+------+----------+-------+----------+-------+------------
+   45949 | 26898 |  58.54 | 5881 |    12.80 | 18677 |    40.65 |  3117 |       6.78
+
+select
+   count(*) filter (where build = 'BUILD') as success,
+   count(*) filter (where build = 'BUILD' and warnings > 0) as success_w,
+   count(*) filter (where build = 'BUILD' and new_warnings > 0) as success_n_w,
+   count(*) filter (where build = 'FAILURE') as failure,
+      count(*) filter (where build = 'FAILURE' and warnings > 0) as failure_w,
+      count(*) filter (where build = 'FAILURE' and new_warnings > 0) as failure_n_w
+   from commit_warning_recovered_summary;
+
+ success | success_w | success_n_w | failure | failure_w | failure_n_w
+---------+-----------+-------------+---------+-----------+-------------
+   33282 |     19553 |        4387 |   12667 |      7345 |        1494
+

@@ -1,0 +1,247 @@
+require("RPostgreSQL")
+
+# Used to obtain deviance explained
+require("modEvA")
+
+# used for multi-colinearity | vif
+require("car")
+
+
+con <- dbConnect(dbDriver("PostgreSQL"), dbname="cas_exp", host="localhost")
+
+newWarnings <- dbGetQuery(con, "SELECT new_warnings
+from commit_warning_summary as w
+where w.new_warnings > 0")
+
+
+avgDevDelta <- dbGetQuery(con, "SELECT c.fix = 'True' as fix, c.contains_bug = 'TRUE' as contains_bug, repo_name,  nd, entrophy,
+la, ld, @lt as lt, ndev, @age as age, nuc, exp, @rexp as rexp, sexp, warnings, new_warnings, jlint_warnings, new_jlint_warnings, findbugs_warnings,
+new_findbugs_warnings, security_warnings, new_security_warnings,
+build != 'BUILD' as build_failed, warnings > 0 as w_bool
+from commits as c, commit_warning_recovered_summary as w
+where c.repository_id = w.repo and c.commit_hash = w.commit")
+
+list_cor <- function(df) {
+  z <- cor(df[sapply(df, is.numeric)], method = 'spearman') #get rid of anything that isn't numeric
+  z[lower.tri(z,diag=TRUE)]=NA  #Prepare to drop duplicates and meaningless information
+  z=as.data.frame(as.table(z))  #Turn into a 3-column table
+  z=na.omit(z)  #Get rid of the junk we flagged above
+  z=z[order(-abs(z$Freq)),]    #Sort by highest correlation (whether +ve or -ve)
+  z
+}
+
+list_cor(avgDevDelta)
+
+
+nf              entrophy  0.958496449
+329              warnings        jlint_warnings  0.957221145
+
+44                     nd                    nf  0.942196030
+65                     nd              entrophy  0.893943858
+
+417     findbugs_warnings     security_warnings  0.873905219
+351          new_warnings    new_jlint_warnings  0.863964174
+413              warnings     security_warnings  0.853545000
+371              warnings     findbugs_warnings  0.802386781
+439 new_findbugs_warnings new_security_warnings  0.784751085
+196                    lt                   nuc  0.777846672
+415        jlint_warnings     security_warnings  0.764439179
+87                     nf                    la  0.755488719
+263                   exp                  sexp  0.741655643
+435          new_warnings new_security_warnings  0.721115856
+86                     nd                    la  0.714896149
+197                  ndev                   nuc  0.692660623
+393          new_warnings new_findbugs_warnings  0.675973117
+88               entrophy                    la  0.673171467
+373        jlint_warnings     findbugs_warnings  0.670788358
+154                    lt                  ndev  0.637320312
+108                    nf                    ld  0.630854856
+191                    nd                   nuc  0.621531754
+22                     ns                    nd  0.589236449
+110                    la                    ld  0.587924341
+107                    nd                    ld  0.586007871
+192                    nf                   nuc  0.570691579
+109              entrophy                    ld  0.570523917
+43                     ns                    nf  0.558329155
+275                    nd              warnings  0.527600124
+193              entrophy                   nuc  0.525194941
+276                    nf              warnings  0.519536477
+317                    nd        jlint_warnings  0.517629474
+318                    nf        jlint_warnings  0.510268264
+437    new_jlint_warnings new_security_warnings  0.505968432
+238                    lt                  rexp  0.496334258
+401                    nd     security_warnings  0.485244243
+64                     ns              entrophy  0.484668159
+277              entrophy              warnings  0.481510526
+402                    nf     security_warnings  0.474597482
+319              entrophy        jlint_warnings  0.474205514
+359                    nd     findbugs_warnings  0.470406326
+278                    la              warnings  0.468496009
+360                    nf     findbugs_warnings  0.463339917
+320                    la        jlint_warnings  0.454287066
+403              entrophy     security_warnings  0.443235690
+361              entrophy     findbugs_warnings  0.433802807
+299                    la          new_warnings  0.426601416
+308              warnings          new_warnings  0.425228333
+404                    la     security_warnings  0.421118423
+279                    ld              warnings  0.416988494
+85                     ns                    la  0.415993228
+321                    ld        jlint_warnings  0.414442532
+362                    la     findbugs_warnings  0.413593367
+414          new_warnings     security_warnings  0.410473857
+372          new_warnings     findbugs_warnings  0.410367107
+241                   nuc                  rexp  0.404006553
+149                    nd                  ndev  0.402442932
+106                    ns                    ld  0.397389548
+325                   nuc        jlint_warnings  0.395548802
+330          new_warnings        jlint_warnings  0.393340279
+283                   nuc              warnings  0.386942654
+341                    la    new_jlint_warnings  0.386705131
+176                  ndev                   age  0.383277539
+352        jlint_warnings    new_jlint_warnings  0.383052922
+440     security_warnings new_security_warnings  0.382798282
+396     findbugs_warnings new_findbugs_warnings  0.379165517
+194                    la                   nuc  0.377366731
+350              warnings    new_jlint_warnings  0.372058073
+405                    ld     security_warnings  0.369802719
+438     findbugs_warnings new_security_warnings  0.367328705
+190                    ns                   nuc  0.364709219
+297                    nf          new_warnings  0.360290874
+409                   nuc     security_warnings  0.358351822
+150                    nf                  ndev  0.356377530
+363                    ld     findbugs_warnings  0.355704515
+395    new_jlint_warnings new_findbugs_warnings  0.345190094
+322                    lt        jlint_warnings  0.344015814
+296                    nd          new_warnings  0.343571009
+170                    nd                   age  0.342541865
+171                    nf                   age  0.342326372
+280                    lt              warnings  0.340761993
+339                    nf    new_jlint_warnings  0.338223389
+418 new_findbugs_warnings     security_warnings  0.334746361
+198                   age                   nuc  0.334557539
+298              entrophy          new_warnings  0.333962826
+416    new_jlint_warnings     security_warnings  0.333102137
+195                    ld                   nuc  0.332521652
+239                  ndev                  rexp  0.330615245
+434              warnings new_security_warnings  0.322863504
+338                    nd    new_jlint_warnings  0.320457605
+340              entrophy    new_jlint_warnings  0.315582455
+367                   nuc     findbugs_warnings  0.313798479
+425                    la new_security_warnings  0.312253701
+374    new_jlint_warnings     findbugs_warnings  0.309389820
+151              entrophy                  ndev  0.304273785
+406                    lt     security_warnings  0.295189424
+392              warnings new_findbugs_warnings  0.293784388
+383                    la new_findbugs_warnings  0.292588728
+172              entrophy                   age  0.290948095
+128                    nd                    lt  0.286266817
+174                    ld                   age  0.278929090
+300                    ld          new_warnings  0.276243605
+260                  ndev                  sexp  0.275812979
+259                    lt                  sexp  0.275494936
+436        jlint_warnings new_security_warnings  0.272737659
+423                    nf new_security_warnings  0.265738175
+173                    la                   age  0.264922127
+152                    la                  ndev  0.263082634
+342                    ld    new_jlint_warnings  0.259771116
+323                  ndev        jlint_warnings  0.257940337
+169                    ns                   age  0.257505854
+422                    nd new_security_warnings  0.255620488
+175                    lt                   age  0.247884317
+274                    ns              warnings  0.245724672
+424              entrophy new_security_warnings  0.245148749
+281                  ndev              warnings  0.242392214
+364                    lt     findbugs_warnings  0.239193697
+381                    nf new_findbugs_warnings  0.238684514
+261                   age                  sexp  0.234621824
+316                    ns        jlint_warnings  0.232451374
+264                  rexp                  sexp  0.231519015
+380                    nd new_findbugs_warnings  0.228786895
+394        jlint_warnings new_findbugs_warnings  0.226690485
+219                   age                   exp  0.225922817
+153                    ld                  ndev  0.225507732
+358                    ns     findbugs_warnings  0.220933904
+382              entrophy new_findbugs_warnings  0.219990567
+262                   nuc                  sexp  0.219034637
+400                    ns     security_warnings  0.212464256
+129                    nf                    lt  0.209965214
+407                  ndev     security_warnings  0.206873064
+282                   age              warnings  0.201163279
+426                    ld new_security_warnings  0.200805268
+324                   age        jlint_warnings  0.200321219
+240                   age                  rexp -0.198563263
+328                  sexp        jlint_warnings  0.198324702
+242                   exp                  rexp  0.195925093
+148                    ns                  ndev  0.189474378
+286                  sexp              warnings  0.188865712
+211                    ns                   exp  0.187198535
+258                    ld                  sexp  0.174187232
+257                    la                  sexp  0.173309073
+384                    ld new_findbugs_warnings  0.169442592
+365                  ndev     findbugs_warnings  0.166015505
+295                    ns          new_warnings  0.165869034
+337                    ns    new_jlint_warnings  0.158957842
+255                    nf                  sexp  0.158949103
+130              entrophy                    lt  0.155654110
+127                    ns                    lt  0.153472897
+346                   nuc    new_jlint_warnings  0.151943223
+216                    ld                   exp  0.150733642
+366                   age     findbugs_warnings  0.150660475
+254                    nd                  sexp  0.150473483
+131                    la                    lt  0.149321603
+218                  ndev                   exp  0.148290616
+408                   age     security_warnings  0.148097942
+132                    ld                    lt  0.147792060
+304                   nuc          new_warnings  0.138200261
+217                    lt                   exp  0.124607014
+412                  sexp     security_warnings  0.124089666
+421                    ns new_security_warnings  0.123022846
+379                    ns new_findbugs_warnings  0.113427186
+232                    ns                  rexp  0.113324940
+215                    la                   exp  0.112473499
+213                    nf                   exp  0.103159399
+370                  sexp     findbugs_warnings  0.101568510
+233                    nd                  rexp  0.094384306
+390                  rexp new_findbugs_warnings -0.094034610
+256              entrophy                  sexp  0.093803051
+220                   nuc                   exp  0.091906495
+430                   nuc new_security_warnings  0.089491508
+306                  rexp          new_warnings -0.086307884
+212                    nd                   exp  0.085901714
+303                   age          new_warnings  0.083788041
+432                  rexp new_security_warnings -0.078418611
+345                   age    new_jlint_warnings  0.077599097
+326                   exp        jlint_warnings  0.076260180
+253                    ns                  sexp  0.070042969
+327                  rexp        jlint_warnings  0.068661862
+348                  rexp    new_jlint_warnings -0.068439388
+344                  ndev    new_jlint_warnings  0.065905204
+285                  rexp              warnings  0.063948919
+237                    ld                  rexp  0.063823316
+284                   exp              warnings  0.055681322
+388                   nuc new_findbugs_warnings  0.052896726
+429                   age new_security_warnings  0.049340667
+349                  sexp    new_jlint_warnings  0.048314854
+234                    nf                  rexp  0.047011523
+307                  sexp          new_warnings  0.044595816
+387                   age new_findbugs_warnings  0.042871817
+302                  ndev          new_warnings  0.041202654
+214              entrophy                   exp  0.037813299
+411                  rexp     security_warnings  0.035540521
+385                    lt new_findbugs_warnings -0.034574337
+386                  ndev new_findbugs_warnings -0.029688448
+389                   exp new_findbugs_warnings -0.027694226
+431                   exp new_security_warnings -0.022428540
+347                   exp    new_jlint_warnings  0.016828120
+368                   exp     findbugs_warnings -0.013393466
+236                    la                  rexp -0.012604883
+433                  sexp new_security_warnings  0.011304633
+427                    lt new_security_warnings -0.010089519
+235              entrophy                  rexp -0.008833851
+343                    lt    new_jlint_warnings  0.007271378
+369                  rexp     findbugs_warnings  0.007208596
+391                  sexp new_findbugs_warnings  0.003490336
+305                   exp          new_warnings  0.002206082
+410                   exp     security_warnings  0.001903748
+301                    lt          new_warnings -0.001886862
+428                  ndev new_security_warnings  0.00154203

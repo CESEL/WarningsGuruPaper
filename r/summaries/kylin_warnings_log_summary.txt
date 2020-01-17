@@ -1,0 +1,64 @@
+    fix          contains_bug     repo_name               ns        
+ Mode :logical   Mode :logical   Length:5749        Min.   : 0.000  
+ FALSE:4556      FALSE:4286      Class :character   1st Qu.: 1.000  
+ TRUE :1193      TRUE :1463      Mode  :character   Median : 1.000  
+ NA's :0         NA's :0                            Mean   : 1.883  
+                                                    3rd Qu.: 2.000  
+                                                    Max.   :23.000  
+       nd                nf              entrophy            la         
+ Min.   :  0.000   Min.   :   0.000   Min.   :0.0000   Min.   :      0  
+ 1st Qu.:  1.000   1st Qu.:   1.000   1st Qu.:0.0000   1st Qu.:      1  
+ Median :  1.000   Median :   2.000   Median :0.4690   Median :     10  
+ Mean   :  3.548   Mean   :   8.563   Mean   :0.9716   Mean   :   1006  
+ 3rd Qu.:  3.000   3rd Qu.:   5.000   3rd Qu.:1.5850   3rd Qu.:     51  
+ Max.   :409.000   Max.   :3655.000   Max.   :9.3619   Max.   :1665281  
+       ld                 lt               ndev            age         
+ Min.   :     0.0   Min.   : -227.0   Min.   : 0.00   Min.   :-44.694  
+ 1st Qu.:     1.0   1st Qu.:   27.0   1st Qu.: 5.00   1st Qu.:  0.003  
+ Median :     4.0   Median :  143.0   Median :13.00   Median :  2.231  
+ Mean   :   562.1   Mean   :  218.4   Mean   :14.69   Mean   : 14.273  
+ 3rd Qu.:    27.0   3rd Qu.:  272.9   3rd Qu.:20.00   3rd Qu.: 15.026  
+ Max.   :958655.0   Max.   :69994.0   Max.   :41.00   Max.   :357.506  
+      nuc               exp            rexp                sexp       
+ Min.   :   0.00   Min.   :   0   Min.   :-2879.000   Min.   :   0.0  
+ 1st Qu.:   2.00   1st Qu.:  23   1st Qu.:    0.900   1st Qu.:   3.0  
+ Median :  13.00   Median :1195   Median :    1.048   Median :  49.0  
+ Mean   :  66.54   Mean   :2014   Mean   :   25.521   Mean   : 277.5  
+ 3rd Qu.:  49.00   3rd Qu.:3199   3rd Qu.:    1.529   3rd Qu.: 221.0  
+ Max.   :7912.00   Max.   :8973   Max.   : 7907.588   Max.   :5435.0  
+    warnings        new_warnings      jlint_warnings    new_jlint_warnings
+ Min.   :  0.000   Min.   :  0.0000   Min.   :  0.000   Min.   :  0.0000  
+ 1st Qu.:  0.000   1st Qu.:  0.0000   1st Qu.:  0.000   1st Qu.:  0.0000  
+ Median :  0.000   Median :  0.0000   Median :  0.000   Median :  0.0000  
+ Mean   :  5.592   Mean   :  0.3747   Mean   :  5.034   Mean   :  0.3347  
+ 3rd Qu.:  4.000   3rd Qu.:  0.0000   3rd Qu.:  4.000   3rd Qu.:  0.0000  
+ Max.   :458.000   Max.   :307.0000   Max.   :458.000   Max.   :307.0000  
+ findbugs_warnings  new_findbugs_warnings security_warnings
+ Min.   :  0.0000   Min.   : 0.00000      Min.   : 0.00    
+ 1st Qu.:  0.0000   1st Qu.: 0.00000      1st Qu.: 0.00    
+ Median :  0.0000   Median : 0.00000      Median : 0.00    
+ Mean   :  0.5584   Mean   : 0.04001      Mean   : 1.16    
+ 3rd Qu.:  0.0000   3rd Qu.: 0.00000      3rd Qu.: 0.00    
+ Max.   :111.0000   Max.   :26.00000      Max.   :94.00    
+ new_security_warnings fallback_warnings fallback_security_warnings
+ Min.   : 0.00000      Mode :logical     Mode :logical             
+ 1st Qu.: 0.00000      FALSE:5060        FALSE:5406                
+ Median : 0.00000      TRUE :689         TRUE :343                 
+ Mean   : 0.08941      NA's :0           NA's :0                   
+ 3rd Qu.: 0.00000                                                  
+ Max.   :22.00000                                                  
+ new_warnings_present new_security_warnings_present build_failed   
+ Mode :logical        Mode :logical                 Mode :logical  
+ FALSE:5060           FALSE:5406                    FALSE:5084     
+ TRUE :689            TRUE :343                     TRUE :665      
+ NA's :0              NA's :0                       NA's :0        
+                                                                   
+                                                                   
+   w_bool       
+ Mode :logical  
+ FALSE:3098     
+ TRUE :2651     
+ NA's :0        
+                
+                
+[1] "model 1"

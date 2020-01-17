@@ -1,0 +1,273 @@
+    fix          contains_bug     repo_name               ns        
+ Mode :logical   Mode :logical   Length:10910       Min.   : 0.000  
+ FALSE:8563      FALSE:8210      Class :character   1st Qu.: 1.000  
+ TRUE :2347      TRUE :2700      Mode  :character   Median : 1.000  
+ NA's :0         NA's :0                            Mean   : 1.207  
+                                                    3rd Qu.: 1.000  
+                                                    Max.   :24.000  
+       nd                nf              entrophy             la          
+ Min.   :  0.000   Min.   :   0.000   Min.   : 0.0000   Min.   :     0.0  
+ 1st Qu.:  1.000   1st Qu.:   1.000   1st Qu.: 0.0000   1st Qu.:     2.0  
+ Median :  1.000   Median :   1.000   Median : 0.0000   Median :    10.0  
+ Mean   :  2.828   Mean   :   7.924   Mean   : 0.7068   Mean   :   278.7  
+ 3rd Qu.:  2.000   3rd Qu.:   3.000   3rd Qu.: 1.0000   3rd Qu.:    46.0  
+ Max.   :847.000   Max.   :6667.000   Max.   :11.3842   Max.   :355066.0  
+       ld               lt              ndev            age           
+ Min.   :     0   Min.   :   0.0   Min.   : 0.00   Min.   :   0.0000  
+ 1st Qu.:     1   1st Qu.: 104.7   1st Qu.:14.00   1st Qu.:   0.9443  
+ Median :     4   Median : 240.8   Median :21.00   Median :  18.6625  
+ Mean   :   255   Mean   : 514.9   Mean   :20.74   Mean   :  86.9239  
+ 3rd Qu.:    17   3rd Qu.: 597.0   3rd Qu.:26.00   3rd Qu.:  90.6835  
+ Max.   :355066   Max.   :4721.0   Max.   :45.00   Max.   :2877.3140  
+      nuc                exp             rexp                sexp      
+ Min.   :    0.00   Min.   :    0   Min.   :    0.000   Min.   :    0  
+ 1st Qu.:    3.00   1st Qu.: 1106   1st Qu.:    1.006   1st Qu.:   79  
+ Median :   10.00   Median : 7410   Median :    1.034   Median :  419  
+ Mean   :   42.93   Mean   : 8083   Mean   :   56.853   Mean   : 2023  
+ 3rd Qu.:   31.00   3rd Qu.:12457   3rd Qu.:    1.437   3rd Qu.: 3729  
+ Max.   :11613.00   Max.   :35504   Max.   :28801.022   Max.   :13175  
+  warnings       new_warnings    security_warnings new_security_warnings
+ Mode :logical   Mode :logical   Mode :logical     Mode :logical        
+ FALSE:5194      FALSE:10247     FALSE:8272        FALSE:10729          
+ TRUE :5716      TRUE :663       TRUE :2638        TRUE :181            
+ NA's :0         NA's :0         NA's :0           NA's :0              
+                                                                        
+                                                                        
+ build_failed      w_bool       
+ Mode :logical   Mode :logical  
+ FALSE:6164      FALSE:5194     
+ TRUE :4746      TRUE :5716     
+ NA's :0         NA's :0        
+                                
+                                
+[1] "Predicting warnings"
+
+Call:
+glm(formula = warnings ~ log2(1 + ns) + log2(1 + nd) + log2(1 + 
+    nf) + log2(1 + entrophy) + log2(1 + la) + log2(1 + ld) + 
+    log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + age) + log2(1 + 
+    nuc) + log2(1 + exp) + log2(1 + rexp) + log2(1 + sexp), family = binomial(), 
+    control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.9361  -0.9393   0.3878   0.9082   2.9819  
+
+Coefficients:
+                    Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        -2.964556   0.171312 -17.305  < 2e-16 ***
+log2(1 + ns)       -0.601039   0.096446  -6.232 4.61e-10 ***
+log2(1 + nd)        0.554900   0.087104   6.371 1.88e-10 ***
+log2(1 + nf)       -0.117752   0.085069  -1.384  0.16630    
+log2(1 + entrophy)  1.004521   0.083564  12.021  < 2e-16 ***
+log2(1 + la)        0.070997   0.012676   5.601 2.13e-08 ***
+log2(1 + ld)       -0.035188   0.012769  -2.756  0.00586 ** 
+log2(1 + lt)        0.540221   0.017277  31.268  < 2e-16 ***
+fixTRUE            -0.105527   0.053733  -1.964  0.04954 *  
+log2(1 + ndev)     -0.056441   0.032544  -1.734  0.08286 .  
+log2(1 + age)      -0.009463   0.009487  -0.997  0.31856    
+log2(1 + nuc)      -0.132118   0.018423  -7.171 7.43e-13 ***
+log2(1 + exp)      -0.144525   0.010255 -14.093  < 2e-16 ***
+log2(1 + rexp)     -0.051379   0.012429  -4.134 3.57e-05 ***
+log2(1 + sexp)      0.095456   0.008658  11.025  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 15099  on 10909  degrees of freedom
+Residual deviance: 12018  on 10895  degrees of freedom
+AIC: 12048
+
+Number of Fisher Scoring iterations: 5
+
+      log2(1 + ns)       log2(1 + nd)       log2(1 + nf) log2(1 + entrophy) 
+          2.073487           6.702667          13.125009           6.802308 
+      log2(1 + la)       log2(1 + ld)       log2(1 + lt)                fix 
+          1.855412           1.748462           2.374486           1.011316 
+    log2(1 + ndev)      log2(1 + age)      log2(1 + nuc)      log2(1 + exp) 
+          1.482822           1.585856           2.492293           1.744054 
+    log2(1 + rexp)     log2(1 + sexp) 
+          1.466887           1.665095 
+       (Intercept)       log2(1 + ns)       log2(1 + nd)       log2(1 + nf) 
+        0.05158336         0.54824194         1.74176702         0.88891652 
+log2(1 + entrophy)       log2(1 + la)       log2(1 + ld)       log2(1 + lt) 
+        2.73059776         1.07357784         0.96542415         1.71638699 
+           fixTRUE     log2(1 + ndev)      log2(1 + age)      log2(1 + nuc) 
+        0.89984984         0.94512248         0.99058154         0.87623763 
+     log2(1 + exp)     log2(1 + rexp)     log2(1 + sexp) 
+        0.86543311         0.94991859         1.10016084 
+[1] "d2 =  0.204104933835882"
+[1] "Predicting new warnings"
+
+Call:
+glm(formula = new_warnings ~ log2(1 + ns) + log2(1 + nd) + log2(1 + 
+    nf) + log2(1 + entrophy) + log2(1 + la) + log2(1 + ld) + 
+    log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + age) + log2(1 + 
+    nuc) + log2(1 + exp) + log2(1 + rexp) + log2(1 + sexp), family = binomial(), 
+    control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.9942  -0.3431  -0.2013  -0.1262   3.2548  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        -5.60344    0.32475 -17.255  < 2e-16 ***
+log2(1 + ns)       -0.02492    0.11386  -0.219 0.826718    
+log2(1 + nd)        0.36840    0.11304   3.259 0.001118 ** 
+log2(1 + nf)       -0.65217    0.11547  -5.648 1.63e-08 ***
+log2(1 + entrophy)  0.69277    0.11912   5.816 6.04e-09 ***
+log2(1 + la)        0.47019    0.02578  18.241  < 2e-16 ***
+log2(1 + ld)       -0.02160    0.02017  -1.071 0.284287    
+log2(1 + lt)       -0.00785    0.03185  -0.246 0.805309    
+fixTRUE            -0.31005    0.12014  -2.581 0.009862 ** 
+log2(1 + ndev)      0.18311    0.06862   2.669 0.007618 ** 
+log2(1 + age)       0.01700    0.01891   0.899 0.368448    
+log2(1 + nuc)       0.07991    0.03749   2.131 0.033058 *  
+log2(1 + exp)      -0.06420    0.01922  -3.341 0.000836 ***
+log2(1 + rexp)     -0.07995    0.03868  -2.067 0.038735 *  
+log2(1 + sexp)      0.04857    0.01794   2.707 0.006787 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 4998.5  on 10909  degrees of freedom
+Residual deviance: 3937.4  on 10895  degrees of freedom
+AIC: 3967.4
+
+Number of Fisher Scoring iterations: 7
+
+      log2(1 + ns)       log2(1 + nd)       log2(1 + nf) log2(1 + entrophy) 
+          1.889217           9.706640          17.832752           5.270214 
+      log2(1 + la)       log2(1 + ld)       log2(1 + lt)                fix 
+          2.399353           2.242310           2.913122           1.009266 
+    log2(1 + ndev)      log2(1 + age)      log2(1 + nuc)      log2(1 + exp) 
+          1.954461           1.442241           3.943002           1.933398 
+    log2(1 + rexp)     log2(1 + sexp) 
+          1.265607           1.972561 
+       (Intercept)       log2(1 + ns)       log2(1 + nd)       log2(1 + nf) 
+       0.003685168        0.975383677        1.445417992        0.520913363 
+log2(1 + entrophy)       log2(1 + la)       log2(1 + ld)       log2(1 + lt) 
+       1.999241241        1.600291064        0.978630161        0.992180366 
+           fixTRUE     log2(1 + ndev)      log2(1 + age)      log2(1 + nuc) 
+       0.733413046        1.200943181        1.017149636        1.083184651 
+     log2(1 + exp)     log2(1 + rexp)     log2(1 + sexp) 
+       0.937815649        0.923162230        1.049773153 
+[1] "d2 =  0.212290125460763"
+[1] "Predicting security warnings"
+
+Call:
+glm(formula = security_warnings ~ log2(1 + ns) + log2(1 + nd) + 
+    log2(1 + nf) + log2(1 + entrophy) + log2(1 + la) + log2(1 + 
+    ld) + log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + age) + 
+    log2(1 + nuc) + log2(1 + exp) + log2(1 + rexp) + log2(1 + 
+    sexp), family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.3210  -0.6493  -0.3720  -0.0439   3.8253  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        -6.86334    0.32110 -21.374  < 2e-16 ***
+log2(1 + ns)       -0.45384    0.09667  -4.695 2.67e-06 ***
+log2(1 + nd)        0.40104    0.08861   4.526 6.02e-06 ***
+log2(1 + nf)        0.30470    0.08970   3.397 0.000682 ***
+log2(1 + entrophy)  0.77270    0.08942   8.641  < 2e-16 ***
+log2(1 + la)        0.05024    0.01514   3.320 0.000902 ***
+log2(1 + ld)       -0.05001    0.01481  -3.377 0.000732 ***
+log2(1 + lt)        0.72559    0.02438  29.757  < 2e-16 ***
+fixTRUE             0.06008    0.06422   0.935 0.349559    
+log2(1 + ndev)     -0.17709    0.04874  -3.633 0.000280 ***
+log2(1 + age)      -0.03317    0.01194  -2.778 0.005473 ** 
+log2(1 + nuc)      -0.04383    0.02230  -1.966 0.049339 *  
+log2(1 + exp)      -0.08348    0.01287  -6.487 8.76e-11 ***
+log2(1 + rexp)     -0.02872    0.01592  -1.804 0.071239 .  
+log2(1 + sexp)      0.06584    0.01100   5.988 2.13e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 12070  on 10909  degrees of freedom
+Residual deviance:  8909  on 10895  degrees of freedom
+AIC: 8939
+
+Number of Fisher Scoring iterations: 6
+
+      log2(1 + ns)       log2(1 + nd)       log2(1 + nf) log2(1 + entrophy) 
+          1.893238           7.578480          14.997193           7.038656 
+      log2(1 + la)       log2(1 + ld)       log2(1 + lt)                fix 
+          2.123817           2.072168           2.264611           1.013890 
+    log2(1 + ndev)      log2(1 + age)      log2(1 + nuc)      log2(1 + exp) 
+          1.272095           1.569857           2.492485           1.688953 
+    log2(1 + rexp)     log2(1 + sexp) 
+          1.428655           1.743219 
+       (Intercept)       log2(1 + ns)       log2(1 + nd)       log2(1 + nf) 
+       0.001045418        0.635186605        1.493371790        1.356216534 
+log2(1 + entrophy)       log2(1 + la)       log2(1 + ld)       log2(1 + lt) 
+       2.165599980        1.051527462        0.951219781        2.065958003 
+           fixTRUE     log2(1 + ndev)      log2(1 + age)      log2(1 + nuc) 
+       1.061918843        0.837703956        0.967378527        0.957112299 
+     log2(1 + exp)     log2(1 + rexp)     log2(1 + sexp) 
+       0.919914054        0.971690633        1.068059874 
+[1] "d2 =  0.261864046185563"
+
+Call:
+glm(formula = new_security_warnings ~ log2(1 + ns) + log2(1 + 
+    nd) + log2(1 + nf) + log2(1 + entrophy) + log2(1 + la) + 
+    log2(1 + ld) + log2(1 + lt) + fix + log2(1 + ndev) + log2(1 + 
+    age) + log2(1 + nuc) + log2(1 + exp) + log2(1 + rexp) + log2(1 + 
+    sexp), family = binomial(), control = list(maxit = 50))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.3088  -0.1849  -0.1118  -0.0720   3.6064  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        -7.09359    0.60739 -11.679  < 2e-16 ***
+log2(1 + ns)       -0.11780    0.19205  -0.613  0.53962    
+log2(1 + nd)        0.29627    0.19656   1.507  0.13174    
+log2(1 + nf)       -0.47794    0.19318  -2.474  0.01336 *  
+log2(1 + entrophy)  0.62448    0.19699   3.170  0.00152 ** 
+log2(1 + la)        0.45660    0.04358  10.477  < 2e-16 ***
+log2(1 + ld)       -0.05955    0.03306  -1.801  0.07171 .  
+log2(1 + lt)        0.08416    0.05703   1.476  0.14002    
+fixTRUE            -0.06800    0.20488  -0.332  0.73997    
+log2(1 + ndev)      0.09374    0.12412   0.755  0.45013    
+log2(1 + age)       0.01116    0.03426   0.326  0.74465    
+log2(1 + nuc)       0.03541    0.06529   0.542  0.58759    
+log2(1 + exp)      -0.03417    0.03409  -1.002  0.31618    
+log2(1 + rexp)     -0.10637    0.07764  -1.370  0.17067    
+log2(1 + sexp)      0.01730    0.03105   0.557  0.57751    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1842.8  on 10909  degrees of freedom
+Residual deviance: 1538.8  on 10895  degrees of freedom
+AIC: 1568.8
+
+Number of Fisher Scoring iterations: 8
+
+      log2(1 + ns)       log2(1 + nd)       log2(1 + nf) log2(1 + entrophy) 
+          1.869078          13.441815          23.466809           5.033173 
+      log2(1 + la)       log2(1 + ld)       log2(1 + lt)                fix 
+          3.028477           2.617990           2.853776           1.013935 
+    log2(1 + ndev)      log2(1 + age)      log2(1 + nuc)      log2(1 + exp) 
+          1.847247           1.413827           4.254135           1.797592 
+    log2(1 + rexp)     log2(1 + sexp) 
+          1.240440           1.853538 
+       (Intercept)       log2(1 + ns)       log2(1 + nd)       log2(1 + nf) 
+      0.0008304083       0.8888727170       1.3448341452       0.6200578893 
+log2(1 + entrophy)       log2(1 + la)       log2(1 + ld)       log2(1 + lt) 
+      1.8672751825       1.5787013934       0.9421925285       1.0878041824 
+           fixTRUE     log2(1 + ndev)      log2(1 + age)      log2(1 + nuc) 
+      0.9342608147       1.0982698868       1.0112208811       1.0360424810 
+     log2(1 + exp)     log2(1 + rexp)     log2(1 + sexp) 
+      0.9664076792       0.8990917004       1.0174483694 
+[1] "d2 =  0.164961316351949"
