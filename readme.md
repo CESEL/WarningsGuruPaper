@@ -15,4 +15,4 @@ The code and readme to run the survey tool to evaluate precieved warning efficie
 We provied the [R scripts](r) and output [CSV](replication_package) data from the paper. 
 
 ### Database
-A dump of the database that can be used with warningsguru is available [here](https://www.dropbox.com/sh/fvwoqo61ykcsv06/AAC5R6wCMcBJ3pnv1YqG85Wla?dl=0)
+A dump of the database that can be used with warningsguru is available [here](https://doi.org/10.5281/zenodo.3747582)
